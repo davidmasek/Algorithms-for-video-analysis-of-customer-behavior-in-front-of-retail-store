@@ -1,0 +1,51 @@
+\chapter{Introduction}
+
+% what we're talking about and why we do it
+The topic of this thesis is automatic video analysis with the goal of tracking people and creating unique identities for them, including demographic information such as age and gender. Movement and demographics can be a valuable source of information for retail stores. This information can help predict customer behavior, evaluate marketing strategies, and find areas for improvement.
+% connect to next paragraph (thesis is in the field of computer vision)
+
+% this is called computer vision
+Motion tracking falls into the area of \textit{computer vision}, which is an interdisciplinary field that deals with gaining  high-level understanding of image or video data and automating tasks based on visual information. Computer vision is at the intersection of image processing, artificial intelligence, physics, and software engineering.
+
+% we will be working on MOT
+A major part of this work is focused on \gls{mot}, the task of identifying objects in a scene and following their positions on subsequent frames. The main parts of \gls{mot} are object detection and object association between frames. Object association is also called re-identification because we are trying to find already identified objects in a new frame. While this work's goal is motion tracking of people, most of the techniques can be applied to general \gls{mot}.
+
+% we need neural networks for this (but Haarcascades ftw)
+\Gls{ai} and \gls{ml} are vital components of \gls{mot} applications. The most popular models for image data processing in the past decade have been \glspl{nn} which will be introduced  in chapter \ref{ch:theory}.
+
+% enter edge computing
+As \gls{ai} grows increasingly common and approachable, there is more focus on performance and scalability. One approach that has been rising in popularity in the last years is \textit{edge computing}\cite{edgecomputing}, a paradigm that moves computation to the edge of the network, where the data is acquired. Processing data this way can save the time and resources needed to transport the data itself, as only processed data are transferred. Specialized hardware used for this purpose is called an edge device. The use of edge devices typically means working with limited resources, which is also a topic of this work. The advantage is that the resulting product is better suited for real-world usage.
+
+% we will also study age/gender
+While movement and location information is helpful, image data provide additional information that we can use. Another part of this work focuses on retrieving age and gender data for tracked people. This information can be used in the retail environment for customer analysis and better targeted marketing.
+
+\section*{Objectives}
+
+This thesis aims to design and implement a pipeline for tracking people in front of a retail store while also obtaining age and gender information where possible. The starting point is the research of existing approaches and solutions. The next step is experimentation and analysis of data collected in the target environment. Based on this, a pipeline will be designed and implemented with emphasis on real-life usability and deployment on edge devices.
+
+\section*{Motivation}
+
+% it's natural to ask and cool to solve
+\Gls{mot} is a natural task to consider. This task has received significant attention in research and in practice. Progress in \gls{ai} theory and computer hardware has allowed \gls{mot} to be achievable with lesser budget and without expensive hardware. It provides interesting and practical use for knowledge in fields of \gls{ai}, statistics, and image processing. 
+
+% personal motivation
+%% feels a bit weird to singular (guess it's ok?)
+%% this paragraph ok?
+Furthermore, this thesis is directly related to my work at the ImproLab laboratory at FIT CTU. The results of this work will be used for practical application and real-world usage in the retail environment.
+
+\section*{Challenges}
+
+% MOT is hard
+While \gls{mot} has been actively studied, the problem is not yet solved. Real environments are complex and variable. Scenes are recorded at different angles and under different lighting conditions. Human movement patterns are complex and virtually unpredictable. This means trackers have to work with uncertain and imprecise information. Both the problems and their solutions,  are explored more in-depth in the following chapters.
+
+% Datasets & Covid problems
+\Gls{ai} models often require large datasets for training. These datasets are also needed to tune the whole \gls{mot} algorithm and evaluate it. This presents a challenge of obtaining a representative and sufficiently large dataset. This task is currently further complicated by the specific situation related to the Covid-19 epidemic. Datasets are discussed in more detail in later parts of the work.
+
+
+\section*{Assumptions}
+
+\Gls{mot} is a broad topic with many possible approaches. To keep the scope manageable, this work assumes a single static camera watching a known scene. Furthermore, we are interested in solutions that work in real-time or near real-time applications  on edge devices. For the task of demographic characteristics, we assume the majority of people are not wearing face masks. 
+
+\section*{Thesis structure}
+
+The rest of the thesis is organized into several chapters. Chapter \ref{ch:theory} introduces theoretical concepts needed for understanding this work. Chapter \ref{ch:related} describes work related to the \gls{mot} and \gls{reid} tasks. Chapter \ref{ch:analysis} discusses the work's objectives in more detail and describes the dataset collection. Chapter \ref{ch:design} presents application design and implementation. Chapter \ref{ch:experiments} evaluates the application's results on the collected dataset, compares different detection models and benchmarks the optimization framework.

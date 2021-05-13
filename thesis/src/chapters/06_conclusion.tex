@@ -1,0 +1,23 @@
+\chapter{Conclusion}
+% automatically added to table of contents, so the lines below not required
+% \addcontentsline{toc}{chapter}{Conclusion}
+% \markboth{Conclusion}{Conclusion}
+
+The goal of this thesis was to design and implement a  pipeline for tracking people in front of a retail store while also obtaining information about age and gender.
+
+In the first two chapters, we presented necessary theoretical concepts and explored related works and existing approaches.
+
+Next, we analyzed the requirements of the retail environment and potential solutions. To provide relevant evaluation, we collected a new dataset with cooperation from retail store owners. Collecting the dataset made us more aware of potential problems and helped in the algorithm design. Due to the current Covid19 epidemic, we were unable to include age and gender information in our dataset, which led us to focus on the tracking task and leave demographic feature extraction as a secondary objective.
+
+Based on our analysis and research, we designed a \gls{mot} pipeline based on the \gls{deepsort} algorithm presented in \cite{Wojke2017_DeepSORT}. We modified the algorithm mainly in the association phase and extended it with the support for demographic information extraction. The tracking is based on associating new detections to existing tracks using the combination of two metrics. The first metric is \gls{iou} of Kalman filter predictions for tracks' locations and detections' bounding boxes. The second metric measures the visual similarity between detections and tracks.
+
+Our pipeline is focused on performance and usability in the retail environment. We implemented the pipeline in Python using TensorRT framework for optimizations. The pipeline is optimized for the Jetson NX device, which has been chosen as a suitable device for production.
+
+% Popsat, že jsme udělali nějaké experimenty, porovnali modely/parametry a napsat jak dopadlo nějaké vyhodnocení (evaluation)
+In the last chapter, we presented experiments comparing various models and evaluated our application on the collected dataset. We concluded that the algorithm provides satisfactory results for use in production and can run in real time.
+
+% future work and potential improvement (+ ImproLab plug?)
+The most relevant opportunities for future improvement are demographic information extraction and overall robustness. Specifically, it would be beneficial to collect data from other locations and include the demographic information. We plan to continue working on the presented pipeline in cooperation with ImproLab laboratory at FIT CTU, with the goal of deploying the application in production.
+
+
+\listoftodos

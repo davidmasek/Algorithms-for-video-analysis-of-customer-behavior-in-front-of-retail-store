@@ -4,7 +4,7 @@ This repository contains the source code and suplementary materials for my bache
 
 ## Content
 
-The `thesis` directory contains the latex sources for the thesis and the generated PDF file.
+The `thesis` directory contains the latex sources for the thesis and the generated [PDF file](thesis/BP_David_Masek_2021.pdf).
 
 The main algorithm pipeline source code is not included, because it is part of a cooperation project between FIT CTU and industrial sphere. The collected dataset is not included for privacy reasons.
 

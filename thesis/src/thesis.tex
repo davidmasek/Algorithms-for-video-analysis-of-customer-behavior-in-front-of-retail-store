@@ -1,0 +1,159 @@
+% arara: xelatex
+% arara: xelatex
+% arara: xelatex
+
+
+% options:
+% thesis=B bachelor's thesis
+% thesis=M master's thesis
+% czech thesis in Czech language
+% english thesis in English language
+% hidelinks remove colour boxes around hyperlinks
+
+\documentclass[thesis=B,english]{meta/FITthesis}[2019/12/23]
+
+\usepackage[utf8]{inputenc} % LaTeX source encoded as UTF-8
+% \usepackage[latin2]{inputenc} % LaTeX source encoded as ISO-8859-2
+% \usepackage[cp1250]{inputenc} % LaTeX source encoded as Windows-1250
+
+% \usepackage{subfig} %subfigures
+\usepackage{amsmath} %advanced maths
+\usepackage{amssymb} %additional math symbols
+
+\usepackage{dirtree} %directory tree visualisation
+
+% % list of acronyms
+\usepackage[acronym,nonumberlist,toc,numberedsection=autolabel]{glossaries}
+\makeglossaries
+
+%%%% <mine>  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareMathOperator{\pst}{P}
+\DeclareMathOperator*{\argmax}{argmax}
+
+% different paragraphs
+% - these settings may mess up other things
+% \setlength{\parindent}{0em}
+% \setlength{\parskip}{1em}
+% - package not really working
+% \usepackage{parskip}
+
+% The degree symbol
+\usepackage{textcomp}
+\usepackage{gensymb}
+
+\usepackage{subcaption}
+
+% fix citations numbering
+\usepackage{notoccite}
+
+
+% ISO-690 citations via https://github.com/michal-h21/biblatex-iso690
+% \usepackage[style=iso-numeric]{biblatex}
+% \addbibresource{bib-database.bib}
+
+% TODO notes package
+% pass [disable] to disable
+% for documentation see http://tug.ctan.org/macros/latex/contrib/todonotes/todonotes.pdf
+\usepackage[disable]{todonotes} 
+% \setlength{\marginparwidth}{3cm}
+% \newcommand{\todo}{}
+% \newcommand{\listoftodos}{}
+
+\usepackage{pdfpages}
+
+\definecolor{commentgreen}{rgb}{2,112,10}
+\definecolor{bluekeywords}{rgb}{0.13, 0.13, 1}
+\definecolor{redstrings}{rgb}{1, 0.4, 0.1}
+\definecolor{graynumbers}{rgb}{0.5, 0.5, 0.5}
+\usepackage{lstautogobble}  % Fix relative indenting
+\usepackage{listings}
+\lstset{
+    autogobble,
+    language=Python, % select language
+    columns=fullflexible,
+    showspaces=false,
+    showtabs=false,
+    numbers=left, % line numbers (none, left, right)
+    breaklines=true,
+    showstringspaces=true,
+    breakatwhitespace=true,
+    escapeinside={(*@}{@*)},
+    commentstyle=\color{commentgreen},
+    keywordstyle=\color{bluekeywords},
+    stringstyle=\color{redstrings},
+    numberstyle=\color{graynumbers},
+    basicstyle=\ttfamily\footnotesize,
+    frame=none, % (l, single, none)
+    framesep=12pt,
+    xleftmargin=12pt,
+    tabsize=4,
+    captionpos=b,
+    morekeywords={mutex_t, cond_t, item_t}, % add keywords
+    emph={mutex_lock, cond_wait, cond_signal, mutex_unlock}, % extra emphasized words
+    emphstyle={\color{red}}
+}
+
+\graphicspath{{./imgs/}}
+
+%%%% </mine> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% EDIT THIS
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+\department{Department of Applied Mathematics}
+\title{Algorithms for video analysis of customer behavior in front of retail store}
+\authorGN{David} %author's given name/names
+\authorFN{Mašek} %author's surname
+\author{David Mašek} %author's name without academic degrees
+\authorWithDegrees{David Mašek} %author's name with academic degrees
+\supervisor{Ing.\,Lukáš Brchl}
+\acknowledgements{I would like to thank my supervisor Ing. Lukáš Brchl for his guidance and advice.  Furthermore, I would like to thank the ImproLab team at FIT CTU for providing me with the thesis topic. Finally, I wish to thank my friends (with a special mention to members of CHS), family and girlfriend for their support.}
+\abstractEN{This thesis aims to design a framework for tracking people based on a stream from a single stationary camera, with the secondary goal of extracting age and gender information for tracked people. The focus of this work is on the retail shop environment. 
+The main algorithm follows the tracking by detection approach. The matching of detections to tracks is done based on spatial and visual information from convolutional neural networks. Kalman filter is used for robust state representation and updates.
+We evaluate the algorithm with multiple detector models on a dataset collected from the target environment. We also evaluate the performance improvements from using the TensorRT optimization framework.
+The resulting application achieves 0.91 MOTA on the testing dataset, with frame rate of 13 FPS on the Jetson NX platform.}
+\abstractCS{Cílem této práce je návrh frameworku pro sledování osob na záznamu z jedné staticky umístěné kamery, s vedlejším cílem extrakce věku a pohlaví sledovaných osob. Práce je zaměřena na prostředí maloobchodu.
+Hlavní algoritmus funguje na principu sledování na základě detekcí. Asociace detekcí k identitám je založena na informacích o poloze a vzhledu získaných z konvolučních neuronových sítí. Kalman filtr je použit pro robustní reprezentaci identit a jejich aktualizaci.
+Algoritmus vyhodnocujeme s několika modely pro detekci na datasetu získaném z cílového prostředí. Také vyhodnocujeme zlepšení výkonu zíkané použitím optimalizačního frameworku TensorRT.
+Výsledná aplikace dosahuje 0.91 MOTA na testovacím datasetu, se snímkovací frekvencí 13 snímků za sekundu na zařízení Jetson NX.}
+\placeForDeclarationOfAuthenticity{Prague}
+\keywordsCS{počítačové vidění, sledování osob, extrakce demografických údajů, TensorRT}
+\keywordsEN{computer vision, people tracking, demographic information extraction, TensorRT}
+\declarationOfAuthenticityOption{1} %select as appropriate, according to the desired license (integer 1-6)
+% \website{http://site.example/thesis} %optional thesis URL
+
+
+\begin{document}
+
+% \newacronym{CVUT}{{\v C}VUT}{{\v C}esk{\' e} vysok{\' e} u{\v c}en{\' i} technick{\' e} v Praze}
+% \newacronym{FIT}{FIT}{Fakulta informa{\v c}n{\' i}ch technologi{\' i}}
+
+\setsecnumdepth{part}
+\include{chapters/00_intro}
+
+
+
+\setsecnumdepth{all}
+\include{chapters/01_theoretical_background}
+\include{chapters/02_related_works}
+\include{chapters/03_analysis}
+\include{chapters/04_design}
+\include{chapters/05_experiments}
+
+\setsecnumdepth{part}
+\include{chapters/06_conclusion}
+
+\bibliographystyle{meta/iso690}
+\bibliography{ref}
+
+\setsecnumdepth{all}
+\appendix
+
+\include{acronyms}
+
+\include{medium}
+
+\end{document}
