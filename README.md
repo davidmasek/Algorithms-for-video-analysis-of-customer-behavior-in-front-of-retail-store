@@ -4,7 +4,7 @@ This repository contains the source code and suplementary materials for my bache
 
 ## Content
 
-The `thesis` directory contains the latex sources for the thesis and generated PDF file.
+The `thesis` directory contains the latex sources for the thesis and the generated PDF file.
 
 The main algorithm pipeline source code is not included, because it is part of a cooperation project between FIT CTU and industrial sphere. The collected dataset is not included for privacy reasons.
 
@@ -26,7 +26,7 @@ The notebooks are supported by Python source code. The main modules are:
 
 See `requirements.txt` for specific libraries and versions. In general you need:
 - [ONNX Runtime](https://www.onnxruntime.ai) for inference with ONNX models,
-- [TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html) for using the TensorRT framework, note that also requires supported NVIDIA graphics card and has complex dependencies,
+- [TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html) for using the TensorRT framework, note that this also requires supported NVIDIA graphics card and has complex dependencies,
 - [face-alignment](https://github.com/1adrianb/face-alignment) for the face alignment experiments,
 - common Python libraries for data processing such as [NumPy](https://numpy.org/).
 
