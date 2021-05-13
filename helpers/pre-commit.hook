@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# place this inside .git/hooks/pre-commit
+
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+	against=HEAD
+else
+	# Initial commit: diff against an empty tree object
+	against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+fi
+
+# Redirect output to stderr.
+exec 1>&2
+
+files_with_nocommit=$(git diff --cached --name-only --diff-filter=ACM $against | xargs -I{} grep -i "nocommit" -l {} | tr '\n' ' ')
+
+if [ "x${files_with_nocommit}x" != "xx" ]
+then
+    echo "File being committed with 'nocommit' in it:"
+    IFS=$'\n'
+    for f in $(git diff --cached --name-only --diff-filter=ACM $against | xargs -I{} grep -i "nocommit" -l {}); do
+        echo $f
+    done
+    exit 1
+fi
+
+exit 0

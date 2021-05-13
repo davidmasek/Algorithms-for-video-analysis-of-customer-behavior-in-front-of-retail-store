@@ -1,0 +1,160 @@
+{
+    "input": "data/test/04-09-3.mp4",
+    "metrics": [
+        {
+            "index": "Metrics",
+            "num_frames": 0,
+            "mota": NaN,
+            "motp": NaN,
+            "num_switches": 0,
+            "num_false_positives": 0,
+            "num_misses": 0,
+            "num_objects": 0,
+            "num_unique_objects": 0
+        }
+    ],
+    "FPS": 12.678,
+    "config": {
+        "size": [
+            1920,
+            1080
+        ],
+        "size_comment": "Image input size (image will be resized to this at the start of the pipeline).",
+        "video_io": {
+            "comment": "Settings for CSI and V4L2 cameras.",
+            "camera_size": [
+                1920,
+                1080
+            ],
+            "camera_fps": 30,
+            "buffer_size": 90
+        },
+        "mot": {
+            "visualisation": {
+                "draw_detections": false,
+                "draw_roi": true,
+                "draw_tracks": true,
+                "draw_annotations": true
+            },
+            "ROI": [
+                67,
+                432,
+                1813,
+                1080
+            ],
+            "ROI_enabled": true,
+            "ROI_comment": "ROI tlbr coordinates. Relevant for metrics.",
+            "detector_type": "ssd",
+            "detector_type_comment": "Select detector type (YOLO, Peoplenet).",
+            "detector_frame_skip": 1,
+            "detector_frame_skip_comment": "Run detections every n-th frame.",
+            "detector_comment": {
+                "person_id_comment": "Specify person class ID.",
+                "face_id_comment": "Specify face class ID."
+            },
+            "classifier": "GoogleNet",
+            "classifier_comment": "Demographics classifier.",
+            "classifier_enabled": false,
+            "GoogleNet": {
+                "age": {
+                    "model": "googlenet.GoogleNetAgeModel",
+                    "batch_size": 1
+                },
+                "gender": {
+                    "model": "googlenet.GoogleNetGenderModel",
+                    "batch_size": 1
+                }
+            },
+            "ssd_detector": {
+                "model": "SSDInceptionV2",
+                "class_ids": [
+                    1
+                ],
+                "tile_overlap": 0.25,
+                "tiling_grid": [
+                    4,
+                    2
+                ],
+                "conf_thresh": 0.5,
+                "max_area": 130000,
+                "merge_thresh": 0.6
+            },
+            "yolo_detector": {
+                "model": "YOLOv4",
+                "person_id": 1,
+                "face_id": 0,
+                "conf_thresh": 0.25,
+                "max_area": 800000,
+                "nms_thresh": 0.5
+            },
+            "peoplenet_detector": {
+                "model": "Peoplenet",
+                "person_id": 0,
+                "face_id": 2,
+                "conf_thresh": 0.25,
+                "nms_thresh": 0.5
+            },
+            "public_detector": {
+                "sequence": "eval/data/MOT17-04",
+                "conf_thresh": 0.5,
+                "max_area": 800000
+            },
+            "feature_extractor": {
+                "comment": "Feature extractor for ReID.",
+                "model": "OSNet025",
+                "batch_size": 16
+            },
+            "multi_tracker": {
+                "max_age": 7,
+                "max_age_comment": "Tracks missed more than `max_age` times are considered lost.",
+                "max_age_active": 1,
+                "max_age_active_comment": "Maximum age to be considered active.",
+                "min_hits": 5,
+                "min_hits_comment": "Minimum hits to be considered confirmed.",
+                "feature_alpha": 0.8,
+                "feature_alpha_comment": "Higher value means slower update of visual feature.",
+                "motion_weight": 0.02,
+                "motion_weight_comment": "Weight of the motion info, feature info is then `1 - motion_weight`.",
+                "max_feat_cost": 0.9,
+                "max_feat_cost_comment": "Feature (appearance) cost above this is considered too high.",
+                "max_reid_cost": 0.6,
+                "max_reid_cost_comment": "Cost above this is considered too high for reidentification.",
+                "iou_thresh": 0.5,
+                "iou_thresh_comment": "IOU below this is considered too low (when associating with IOU).",
+                "duplicate_iou": 0.8,
+                "duplicate_iou_comment": "`Aged` and `updated` tracks above this IOU are considered duplicates.",
+                "conf_thresh": 0.5,
+                "conf_tresh_comment": "When re-identifying lost detections, work only with detections with at least this confidence.",
+                "lost_buf_size": 50,
+                "lost_buf_size_comment": "How many lost tracks to keep.",
+                "face_matching": {
+                    "dx": 0.33,
+                    "dx2": 0.66,
+                    "dy": 0.07,
+                    "dy2": 0.25
+                },
+                "kalman_filter": {
+                    "version": "filterpy_alt",
+                    "std_factor_acc": 2.25,
+                    "std_offset_acc": 78.5,
+                    "std_factor_det": [
+                        0.08,
+                        0.08
+                    ],
+                    "min_std_det": [
+                        4.0,
+                        4.0
+                    ],
+                    "init_pos_weight": 5,
+                    "init_vel_weight": 10,
+                    "vel_coupling": 0.6,
+                    "vel_half_life": 2,
+                    "measurement_noise": 72,
+                    "initial_covariance": 100,
+                    "process_noise_var": 1,
+                    "process_noise_dt": 1
+                }
+            }
+        }
+    }
+}
